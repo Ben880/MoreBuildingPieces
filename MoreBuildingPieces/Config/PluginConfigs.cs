@@ -1,0 +1,58 @@
+﻿using BepInEx.Configuration;
+using Jotunn.Configs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+namespace MoreBuildingPieces {
+
+    public partial class PluginConfigs {
+        public static ConfigEntry<bool> IsModEnabled { get; private set; }
+
+        // sets
+        public static ConfigEntry<bool> BlackMarbleSet { get; private set; }
+        public static ConfigEntry<bool> DvergrSets { get; private set; }
+        public static ConfigEntry<bool> ExpSets { get; private set; }
+
+        // config
+        public static ConfigEntry<bool> FillLoot { get; private set; }
+        public static ConfigEntry<bool> DropLoot { get; private set; }
+        public static ConfigEntry<float> InteractionRange { get; private set; }
+
+        // shouts
+        public static ConfigEntry<String> ArriveMessage;
+        public static ConfigEntry<String> ShoutMessage;
+        public static ConfigEntry<KeyboardShortcut> SendShoutButton;
+   
+
+        public static void BindConfig(ConfigFile config) {
+            Jotunn.Logger.LogInfo("MoreBuildingPieces loading configs");
+            Jotunn.Logger.LogInfo("    | Main");
+            // Global
+            IsModEnabled = config.Bind<bool>("Global", "isModEnabled", true, "Globally enable or disable this mod (restart required).");
+
+            //sets
+            BlackMarbleSet = config.Bind<bool>("Sets", "BlackMarbleSet", true, "Load Black Marble Set (restart required).");
+            DvergrSets = config.Bind<bool>("Sets", "DvergrSets", true, "Load Dvergr Sets (restart required).");
+            ExpSets = config.Bind<bool>("Sets", "ExpSets", false, "Load Experimental Sets (restart required).");
+
+            //config
+            FillLoot = config.Bind<bool>("Config", "FillLoot", false, "should placed containers filled with loot loot.");
+            DropLoot = config.Bind<bool>("Config", "DropLoot", false, "should placed buildings drop loot or the items used to build them.");
+            InteractionRange = config.Bind<float>("Config", "InteractionRange", 20f, "interaction range for mod.");
+
+            // shouts
+            var defaultSendShoutButton = new KeyboardShortcut(KeyCode.S, KeyCode.LeftControl);
+            SendShoutButton = config.Bind("Shout", "SendShoutButton", defaultSendShoutButton, "Button to send shout.");
+            ShoutMessage = config.Bind("Shout", "ShoutMessage", "Some string", "Client side string");
+            ArriveMessage = config.Bind("Shout", "ArriveMessage", "I HAVE CUM!", "Client side string");
+
+
+            BindConfigBinds(config);
+        }
+    }
+}

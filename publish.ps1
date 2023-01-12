@@ -51,6 +51,8 @@ if ($Target.Equals("Debug")) {
     Write-Host "Copy $TargetAssembly to $plug"
     Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
     Copy-Item -Path "$TargetPath\$name.pdb" -Destination "$plug" -Force
+	Copy-Item -Path "$TargetPath\$name.pdb" -Destination "$plug" -Force
+	Copy-Item -Path "$TargetPath\PieceData.csv" -Destination "$plug" -Force
     Copy-Item -Path "$TargetPath\$name.dll.mdb" -Destination "$plug" -Force
 }
 
@@ -63,6 +65,7 @@ if($Target.Equals("Release")) {
     New-Item -Type Directory -Path "$PackagePath\plugins" -Force
     Copy-Item -Path "$TargetPath\$TargetAssembly" -Destination "$PackagePath\plugins\$TargetAssembly" -Force
     Copy-Item -Path "$ProjectPath\README.md" -Destination "$PackagePath\README.md" -Force
+	Copy-Item -Path "$ProjectPath\PieceData.csv" -Destination "$PackagePath\plugins\PieceData.csv" -Force
     Compress-Archive -Path "$PackagePath\*" -DestinationPath "$TargetPath\$TargetAssembly.zip" -Force
 }
 

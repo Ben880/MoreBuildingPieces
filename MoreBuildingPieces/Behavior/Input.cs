@@ -24,11 +24,11 @@ namespace MoreBuildingPieces.Behavior {
                 ZRoutedRpc.instance.InvokeRoutedRPC(ZRoutedRpc.Everybody, "ChatMessage", localPlayer.GetHeadPoint(), 2, localPlayer.GetPlayerName(), PluginConfigs.ShoutMessage.Value, PrivilegeManager.GetNetworkUserId());
             }
 
-            if (PluginConfigs.DeleteLookingAt.Value.IsDown()) {
+            if (PluginConfigs.DeleteLookingAt.Value.IsDown() && PluginConfigs.DevTools.Value) {
                 Building.DeleteLookingAt();
             }
 
-            if (PluginConfigs.PrintLookingAt.Value.IsDown()) {
+            if (PluginConfigs.PrintLookingAt.Value.IsDown() && PluginConfigs.DevTools.Value) {
                 Building.PrintLookingAt();
             }
         }

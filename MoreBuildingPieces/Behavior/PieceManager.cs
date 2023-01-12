@@ -97,7 +97,7 @@ namespace MoreBuildingPieces.Behavior {
             if (pieces.ContainsKey(prefab.name) && !GetPiece(prefab.name).Enabled) {
                 Jotunn.Logger.LogInfo($"Piece is disabled {prefab}");
             }
-            return pieces.ContainsKey(prefab.name) && (!GetPiece(prefab.name).Exp || PluginConfigs.ExpSets.Value) && GetPiece(prefab.name).Enabled;
+            return pieces.ContainsKey(prefab.name) && (!GetPiece(prefab.name).Exp || PluginConfigs.ExpSet.Value) && GetPiece(prefab.name).Enabled;
         }
 
         public static void FindAndRegisterPrefabs() {
@@ -112,11 +112,6 @@ namespace MoreBuildingPieces.Behavior {
                     LoadPiece(instance.gameObject);
                 }
             }
-            /*            ZNetScene.instance.m_prefabs
-                          .Where(gameObject => ShouldLoadPrefab(gameObject)) //gameObject.transform.parent == null &&
-                          .OrderBy(gameObject => gameObject.name)
-                          .ToList()
-                          .ForEach(LoadPiece);*/
         }
     }
 
@@ -138,7 +133,10 @@ namespace MoreBuildingPieces.Behavior {
                 Jotunn.Logger.LogInfo($"Piece is disabled {Name}");
                 return false;
             }
-            return !Exp || PluginConfigs.ExpSets.Value;
+            if (!PluginConfigs.ShouldLoadSet(Category))
+                return false;
+
+            return !Exp || PluginConfigs.ExpSet.Value;
         }
 
         public void Add(string key, string value) {

@@ -24,7 +24,7 @@ namespace MoreBuildingPieces
     {
         public const string PluginGUID = "com.bendover.MoreBuildingPieces";
         public const string PluginName = "MoreBuildingPieces";
-        public const string PluginVersion = "0.1.0";
+        public const string PluginVersion = "0.1.1";
 
         private readonly Harmony harmony = new Harmony("com.bendover.MoreBuildingPieces");
 

@@ -15,7 +15,7 @@ Refactor codebase
 + Command to delete instance that is being looked at
 + Command to print information about instance being looked at
 + More pieces
-+ Keybinds for delet and looking at
++ Keybinds for delete and looking at
 + Split config file into multiple files
 + Split command into multiple files
 

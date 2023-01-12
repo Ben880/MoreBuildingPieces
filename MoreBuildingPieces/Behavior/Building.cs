@@ -42,7 +42,8 @@ namespace MoreBuildingPieces.Behavior {
         public static void PrintLookingAt() {
             GameObject hoverObject = GetLookingAt();
             Jotunn.Logger.LogInfo($"Looking at: {hoverObject.name}");
-            Jotunn.Logger.LogInfo($"    | Parent: {hoverObject.transform.parent.gameObject.name}");
+            if (hoverObject.transform.parent)
+                Jotunn.Logger.LogInfo($"    | Parent: {hoverObject.transform.parent.gameObject.name}");
             Jotunn.Logger.LogInfo($"    | Layer: {hoverObject.layer}");
             Jotunn.Logger.LogInfo($"    | Tag: {hoverObject.tag}");
             Jotunn.Logger.LogInfo($"    | Components:");
